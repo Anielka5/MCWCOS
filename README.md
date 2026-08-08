@@ -19,7 +19,7 @@ In my custom font, the character 'A' is just a full block. I have written specia
 1. Download the program from GitHub and place it directly on the `C:` drive (into the `C:\MCWCOS` directory).
 2. Compile the file `moj_system.cpp` using the following command in your terminal:
    ```cmd
-   g++ "C:/MCWCOS/moj_system.cpp" -o "C:/MCWCOS/MCWCOS.exe"
+   g++ "C:/MCWCOS/moj_system.cpp" -o "C:/MCWCOS/MCWCOS.exe" -Wl,--subsystem,console:4.0 -lgdi32
    ```
 3. Once compilation is complete, **run** `MCWCOS.exe` **as an administrator**.
 
