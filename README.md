@@ -20,7 +20,7 @@ Instead of slow standard printing methods, the system utilizes a high-performanc
 1. Download the program from GitHub and place it directly into the `C:/MyOS/MCWCOS/` directory.
 2. Compile the file `sys.cpp` using the following command in your terminal:
    ```cmd
-   g++ "C:/MyOS/MCWCOS/sys.cpp" -o "C:/MyOS/MCWCOS/MCWCOS.exe" "-Wl,--subsystem,console:4.0" -lgdi32
+   g++ "C:/MyOS/MCWCOS/sys.cpp" -o "C:/MyOS/MCWCOS/MCWCOS-alpha2_0_1.exe" "-Wl,--subsystem,console:4.0" -lgdi32
    ```
 3. Once compilation is complete, **run** `MCWCOS.exe` **as an administrator** directly via `conhost.exe` (Windows Console Host).
 
