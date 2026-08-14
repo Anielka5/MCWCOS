@@ -5,7 +5,6 @@ made by Anielka5555*/
 
 //importing
 #include <windows.h>
-#include <conio.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "./functions/font/font.h"
@@ -75,6 +74,29 @@ void needed_settings(const int width, const int height){
     }
 }
 
+/*Sprawdza czy mamy windows 11 i czy będzie robił nam nieśmiertelne okna*/
+typedef LONG (WINAPI *RtlGetVersion_t)(PRTL_OSVERSIONINFOW);
+
+BOOL CzyToWindows11() {
+    HMODULE hNtDll = GetModuleHandleA("ntdll.dll");
+    if (hNtDll == NULL) return FALSE;
+
+    RtlGetVersion_t RtlGetVersion = (RtlGetVersion_t)GetProcAddress(hNtDll, "RtlGetVersion");
+    if (RtlGetVersion != NULL) {
+        RTL_OSVERSIONINFOW osInfo = { 0 };
+        osInfo.dwOSVersionInfoSize = sizeof(osInfo);
+        
+        if (RtlGetVersion(&osInfo) == 0) { // 0 oznacza STATUS_SUCCESS
+            // Windows 11 ma ten sam Major i Minor co Windows 10 (10.0),
+            // ale jego numery kompilacji (Build Number) zaczynają się od 22000!
+            if (osInfo.dwMajorVersion == 10 && osInfo.dwBuildNumber >= 22000) {
+                return TRUE; // Mamy Windows 11!
+            }
+        }
+    }
+    return FALSE; // Starszy system (Win10, Win7, XP itp.)
+}
+
 //main
 int main() {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -103,11 +125,13 @@ int main() {
     // === REAKCJA NA ESCAPE ===
     Beep(880, 150);
 
-    // 1. OBRONA PRZED WIDMEM DWM: Ukrywamy fizyczne okno konsoli przed systemem!
-    // Dzięki temu Windows 11 natychmiast wymaże bufor graficzny Twojej aplikacji z ekranu.
-    HWND hWndDoZamkniecia = GetConsoleWindowUniversal();
-    if (hWndDoZamkniecia != NULL) {
-        ShowWindow(hWndDoZamkniecia, SW_HIDE); 
+    if (CzyToWindows11()){
+        // 1. OBRONA PRZED WIDMEM DWM: Ukrywamy fizyczne okno konsoli przed systemem!
+        // Dzięki temu Windows 11 natychmiast wymaże bufor graficzny Twojej aplikacji z ekranu.
+        HWND hWndDoZamkniecia = GetConsoleWindowUniversal();
+        if (hWndDoZamkniecia != NULL) {
+            ShowWindow(hWndDoZamkniecia, SW_HIDE); 
+        }
     }
 
     /* AWARYJNY I UKRYTY RESTART PULPITU */
