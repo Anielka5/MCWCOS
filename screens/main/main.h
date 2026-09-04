@@ -20,7 +20,7 @@ namespace drawEl{
                 printSpecialA(x, y, RETRO_ZOLTY);
             }
         }
-        if (to_draw_NUM_MODE) NUM_MODE();
+        
         rysujIkone(read::FindObjPos("data/console/consolepos.dat"), ikona_konsola_29x29);
         rysujIkone(read::FindObjPos("data/draw/drawpos.dat"), ikona_draw_29x29);
         rysujIkone(read::FindObjPos("data/info/infopos.dat"), ikona_info_29x29);
@@ -29,6 +29,7 @@ namespace drawEl{
         rysujIkone(read::FindObjPos("data/trashbin/trashpos.dat"), ikona_kosz_29x29);
         rysujIkone(read::FindObjPos("data/my_files/myfilespos.dat"), ikona_foldery_29x29);
         rysujIkone(read::FindObjPos("data/web/webpos.dat"), ikona_internet_29x29);
+        if (to_draw_NUM_MODE) NUM_MODE();
 
         for (y = 220; y < height; ++y) {
             for (x = 0; x < width; ++x) {
