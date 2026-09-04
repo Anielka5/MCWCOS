@@ -12,6 +12,7 @@ made by Anielka5555*/
 
 //definitons of vars
 CHAR_INFO globalny_ekran[320 * 240];
+bool num_mode = true;
 //settings
 // Bezpieczna metoda pobierania HWND okna działająca od Windows 95 do Windows 11
 HWND GetConsoleWindowUniversal() {
@@ -108,7 +109,7 @@ int main() {
     needed_settings(SZEROKOSC, WYSOKOSC);
 
     // Wywołanie rysowania Twojego retro pulpitu
-    draw::Desktop(SZEROKOSC, WYSOKOSC);
+    drawEl::Desktop(SZEROKOSC, WYSOKOSC, num_mode);
 
     // FIX: Usunięto ponowną deklarację HANDLE hConsole, używamy tej z góry main()
     COORD coord = {0, 0};
@@ -118,6 +119,16 @@ int main() {
     while (TRUE) {
         if (GetAsyncKeyState(VK_ESCAPE) & 0x8000) {
             break; // Gwarancja wyjścia z pętli po kliknięciu ESC
+        }
+        else if (GetAsyncKeyState('n') & 0x8000 || GetAsyncKeyState('N') & 0x8000) {
+            if (num_mode){
+                num_mode = false;
+                drawEl::Desktop(SZEROKOSC, WYSOKOSC, num_mode);
+            }
+            else {
+                num_mode = true;
+                drawEl::Desktop(SZEROKOSC, WYSOKOSC, num_mode);
+            }
         }
         Sleep(20); 
     }

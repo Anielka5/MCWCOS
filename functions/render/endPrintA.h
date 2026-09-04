@@ -1,5 +1,6 @@
-#ifndef ER
-#define ER
+#ifndef END_PRINT_A_H
+#define END_PRINT_A_H
+
 #include <windows.h>
 
 extern CHAR_INFO globalny_ekran[320 * 240];

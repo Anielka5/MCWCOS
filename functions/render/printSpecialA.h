@@ -1,7 +1,7 @@
 #ifndef A
 #define A
 
-#include "./colors/colors.h" // Importujemy Twoją paletkę
+#include "../colors/colors.h" // Importujemy Twoją paletkę
 #include <windows.h>
 
 // Zakładamy, że tablica globalny_ekran jest zadeklarowana w projekcie
