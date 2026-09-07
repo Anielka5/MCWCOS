@@ -1,26 +1,27 @@
 # MCWCOS
 Multi-compatible Console Windows Cover Operational System
 --------------------------------------------------------
-## What this application is made to be
-This app is a Windows shell that acts like a desktop. It is written in C++ and uses the `windows.h` library to set the proper window size and apply the smallest font possible (a 2x2 font, because at 1x1 the window size bugs out). 
 
-Instead of slow standard printing methods, the system utilizes a high-performance rendering engine built around the native `WriteConsoleOutputW()` API. It writes direct pixel data into a global screen buffer (`CHAR_INFO`), allowing the layout to render instantly. In this system, the character 'A' acts as a solid pseudo-pixel block. Special custom editing functions (`printSpecialA`) handle positioning, drawing, and fast buffer flushing via the `endPrintA` header file.
+## What this application is
+This app is a custom Windows shell that acts as a desktop environment. It is written in C++ and uses the `windows.h` API to set the window bounds and apply the smallest possible console font (2x2 pixels, as 1x1 leads to layout glitches).
 
-## Current progress (What is actually implemented)
-1. It instantly prints the screen layout, which is currently displayed as a fast blue and yellow grid.
-2. It includes a smart operating system detector that targets Windows 11-specific DWM (Desktop Window Manager) behavior to ensure clean window closure.
-3. I have programmed the Escape key to exit the program, safely terminate the custom process layer, and restore the normal Windows desktop.
-4. While AI helped me with some of the implementation details, the entire architecture, concept, and core logic are mine.
+Instead of relying on slow standard console output methods, the system utilizes a high-performance rendering engine built around the native `WriteConsoleOutputW()` API. It writes raw pixel data directly into a global screen buffer (`CHAR_INFO`), allowing the UI to render instantly. In this architecture, the character 'A' acts as a solid pseudo-pixel block. Custom render helpers (`printSpecialA`) handle positioning and color drawing, while fast buffer flushing is managed via the `endPrintA` header file.
 
-## How to run it and System Requirements
-* **System Requirements:** Windows 95 up to Windows 11. For versions older than Win95, the behavior is unknown.
-* **Prerequisites:** Install a C++ compiler, such as G++.
+## Current Progress
+1. Instantly renders the modular desktop interface.
+2. Includes a smart OS detector targeting Windows 11-specific DWM (Desktop Window Manager) behavior to ensure clean window closure.
+3. Features shortcut handling (e.g., the `Escape` key exits the app, safely terminates the custom process layer, and restores the standard Windows desktop environment).
+4. While AI assisted with specific implementation details, the overall architecture, concept, and core logic were independently designed and developed.
 
-### How to run:
-1. Download the program from GitHub and place it directly into the `C:/MyOS/MCWCOS/` directory.
-2. Compile the file `sys.cpp` using the following command in your terminal:
+## System Requirements & How to Run
+* **System Requirements:** Windows 95 up to Windows 11 (compatibility with versions older than Win95 is untested).
+* **Prerequisites:** A C++ compiler (such as MinGW / G++).
+
+### How to Run:
+1. Clone or download the repository directly into `C:\MyOS\MCWCOS\`.
+2. Compile `sys.cpp` using your terminal:
    ```cmd
-   g++ "C:/MyOS/MCWCOS/sys.cpp" -o "C:/MyOS/MCWCOS/MCWCOS-alpha2_0_1.exe" "-Wl,--subsystem,console:4.0" -lgdi32
+   g++ "C:/MyOS/MCWCOS/sys.cpp" -o "C:/MyOS/MCWCOS/MCWCOS.exe" "-Wl,--subsystem,console:4.0" -lgdi32
    ```
 3. Once compilation is complete, **run** `MCWCOS.exe` **as an administrator** directly via `conhost.exe` (Windows Console Host).
 
