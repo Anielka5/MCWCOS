@@ -21,7 +21,7 @@ Instead of relying on slow standard console output methods, the system utilizes 
 1. Clone or download the repository directly into `C:\MyOS\MCWCOS\`.
 2. Compile `sys.cpp` using your terminal:
    ```cmd
-   g++ "C:/MyOS/MCWCOS/sys.cpp" -o "C:/MyOS/MCWCOS/MCWCOS.exe" "-Wl,--subsystem,console:4.0" -lgdi32
+   g++ "C:/MyOS/MCWCOS/sys.cpp" -o "C:/MyOS/MCWCOS/MCWCOS_3_0_0.exe" "-Wl,--subsystem,console:4.0" -lgdi32
    ```
 3. Once compilation is complete, **run** `MCWCOS.exe` **as an administrator** directly via `conhost.exe` (Windows Console Host).
 
