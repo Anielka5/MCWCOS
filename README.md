@@ -48,3 +48,6 @@ If you install this program to use it (and not to edit the source code), please 
 * **Do not edit** the source code directly.
 
 Breaking the first three rules will break the program. Breaking the fourth rule will cause undefined behavior.
+
+-------------------------------
+By the way, alpha 3.1.0 is coming soon, but I've got some work on it.
