@@ -1,7 +1,19 @@
-#ifndef FONT_H
+﻿#ifndef FONT_H
 #define FONT_H
 
 #include <windows.h>
+
+//definicja 1
+#ifndef CONSOLE_FONT_INFOEX
+typedef struct _CONSOLE_FONT_INFOEX{
+	ULONG cbSize;
+	DWORD nFont;
+	COORD dwFontSize;
+	UINT FontFamily;
+	UINT FontWeight; 
+	WCHAR FaceName[LF_FACESIZE];
+} CONSOLE_FONT_INFOEX, *PCONSOLE_FONT_INFOEX;
+#endif
 
 // Definiujemy wskaźniki dynamiczne – dzięki temu program uruchomi się na Win95
 typedef BOOL (WINAPI *SetConsoleFont_t)(HANDLE, DWORD);

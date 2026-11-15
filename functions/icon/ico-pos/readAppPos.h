@@ -40,6 +40,8 @@ namespace read {
             }
             CloseHandle(plik);
         }
+        if (link == "data/trashbin/trashpos.dat") return Point{6, 6};
+        else if (link == "data/my_files/myfilespos.dat") return Point{6, 48};
 
         // Jeśli nie wczytano pliku, zwracamy pozycję ujemną jako flagę błędu.
         if (!wczytanoPoprawnie) {
@@ -49,8 +51,8 @@ namespace read {
         switch (pos)
         {
         // Kolumna 1
-        case 1:  return Point{6, 6};
-        case 2:  return Point{6, 48};
+        case 51:  return Point{6, 6};//zamiast 1
+        case 52:  return Point{6, 48};//zamiast 2
         case 3:  return Point{6, 90};
         case 4:  return Point{6, 132};
         case 5:  return Point{6, 174};

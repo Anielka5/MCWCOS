@@ -4,12 +4,19 @@ made by Anielka5555*/
 /*Predispositions bla bla bla bla*/
 
 //importing
-#include <windows.h>
+#include "sysInput.hpp"
 #include <stdio.h>
 #include <stdlib.h>
 #include "./functions/font/font.h"
 #include "./screens/main/main.h"
+#include "./functions/graphics/frame.h"
+#include <cstdio>
+#include <cstring>
+#include <string>
 
+#ifndef _WINTERNL_
+typedef OSVERSIONINFOW RTL_OSVERSIONINFOW, *PRTL_OSVERSIONINFOW;
+#endif
 //definitons of vars
 CHAR_INFO globalny_ekran[320 * 240];
 bool num_mode = true;
@@ -98,6 +105,7 @@ BOOL CzyToWindows11() {
     return FALSE; // Starszy system (Win10, Win7, XP itp.)
 }
 
+
 //main
 int main() {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -115,7 +123,7 @@ int main() {
     COORD coord = {0, 0};
     SetConsoleCursorPosition(hConsole, coord);
 
-     /* PANCERNA PĘTLA ZAMYKANIA – SPRAWDZANIE BEZPOŚREDNIO W WINDOWS 11 */
+    /* PANCERNA PĘTLA ZAMYKANIA – SPRAWDZANIE BEZPOŚREDNIO W WINDOWS 11 */
     while (TRUE) {
         if (GetAsyncKeyState(VK_ESCAPE) & 0x8000) {
             break; // Gwarancja wyjścia z pętli po kliknięciu ESC
@@ -129,6 +137,68 @@ int main() {
                 num_mode = true;
                 drawEl::Desktop(SZEROKOSC, WYSOKOSC, num_mode);
             }
+        }
+        else if (GetAsyncKeyState('1') & 0x8000){
+            frame(1);
+            ikonka("51");
+            unframe(1);
+        }
+        else if (GetAsyncKeyState('2') & 0x8000){
+            frame(2);
+            ikonka("52");
+            unframe(2);
+        }
+        else if (GetAsyncKeyState('3') & 0x8000){
+            frame(3);
+            ikonka("3");
+            unframe(3);
+        }
+        else if (GetAsyncKeyState('4') & 0x8000){
+            frame(4);
+            while (true){
+                if (GetAsyncKeyState(VK_RETURN) & 0x8000) {
+                    if (_kbhit()) _getch(); // Czyści Enter z bufora klawiatury
+                    // WinExec zwraca > 31, jeśli uruchomienie się powiodło
+                    if (WinExec("conhost.exe", SW_SHOWNORMAL) <= 31) {
+                        WinExec("cmd.exe", SW_SHOWNORMAL);
+                    }
+                    unframe(4);
+                    break;
+                }
+                else if (GetAsyncKeyState('6') & 0x8000) {
+                    if (_kbhit()) _getch(); // Czyści Enter z bufora klawiatury
+                    // WinExec zwraca > 31, jeśli uruchomienie się powiodło
+                    unframe(4);
+                    frame(46);
+                    ikonka("46");
+                    unframe(46);
+                    break;
+                }
+                else if (GetAsyncKeyState('7') & 0x8000) {
+                    if (_kbhit()) _getch(); // Czyści Enter z bufora klawiatury
+                    // WinExec zwraca > 31, jeśli uruchomienie się powiodło
+                    unframe(4);
+                    frame(47);
+                    ikonka("47");
+                    unframe(47);
+                    break;
+                }
+                else if (_kbhit()) {
+                    _getch(); // Pobiera inny naciśnięty klawisz i czyści bufor
+                    break;
+                }
+                Sleep(10); // Odciąża procesor podczas czekania w pętli
+            }
+        }
+        else if (GetAsyncKeyState('5') & 0x8000){
+            frame(5);
+            ikonka("5");
+            unframe(5);
+        }
+        else if (GetAsyncKeyState('6') & 0x8000){
+            frame(6);
+            ikonka("6");
+            unframe(6);
         }
         Sleep(20); 
     }
