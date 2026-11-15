@@ -5,7 +5,7 @@
 
 namespace read {
     // Zakładam, że struktura Point jest zdefiniowana globalnie
-    using Point = ::Point;
+    typedef ::Point Point;
 
     Point FindObjPos(const char* link) {
         HANDLE plik;
